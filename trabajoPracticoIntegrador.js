@@ -398,3 +398,115 @@ function normalizarDatos() {
 // Ejemplo de uso
 normalizarDatos(); */
 
+function menuPrincipal() {
+    let opcion;
+    do {
+        //Limpiar consola antes de mostrar el menu principal
+        console.clear();
+
+        // Mostrar menú de opciones al usuario
+        opcion = prompt(`Menú Principal:\n
+1. Agregar libro\n2. Buscar libro\n3. Ordenar libros\n4. Borrar libro\n5. Registrar Usuario\n6. Mostrar todos los usuarios\n7. Buscar usuario por mail\n8. Borrar usuario\n9. Prestar libro \n10. Devolver libro\n11. Genera reporte de libro\n12. Calcular estadisticas\n13. Normalizar datos\n14. Salir\nSelecciona una opción:`);
+
+        switch (opcion) {
+            case "1":
+                // Opción para agregar libro
+                let nuevoLibro = {
+                    id: parseInt(prompt("Ingrese el ID del libro:")),
+                    titulo: prompt("Ingrese el título del libro:"),
+                    autor: prompt("Ingrese el autor del libro:"),
+                    anio: parseInt(prompt("Ingrese el año del libro:")),
+                    genero: prompt("Ingrese el género del libro:")
+                };
+                agregarLibro(nuevoLibro);
+                console.log("Libro agregado correctamente.");
+                break;
+
+            case "2":
+                // Opción para buscar libro
+                let criterio = prompt("Buscar por (titulo, autor, género):");
+                let valor = prompt("Ingrese el valor de búsqueda:");
+                let resultados = buscarLibro(criterio, valor);
+                console.log("Resultados de la búsqueda:", resultados);
+                break;
+
+            case "3":
+                // Opción para ordenar libros
+                let criterioOrden = prompt("Ordenar por (titulo, anio):");
+                ordenarLibros(criterioOrden);
+                break;
+
+            case "4":
+                // Opcion para borrar libro
+                let idLibroBorrar = parseInt(prompt("Ingrese el ID del libro a borrar: "));
+            borrarLibro(idLibroBorrar);
+            break;
+            
+            case "5":
+                // Opcion Registrar usuario
+                let nombre = prompt("Ingrese el nombre del usuario:");
+                let email = prompt("Ingrese el email del usuario:");
+                registrarUsuario(nombre, email);
+                break;
+            
+            case "6":
+                // Opcion Mostrar todos los usuarios
+                let usuariosList = mostrarTodosLosUsuarios();
+                console.log(usuariosList);
+                break;
+        
+            case "7":
+                // Buscas usuario por mail
+                let emailBusqueda = prompt("Ingrese el email del usuario a buscar:");
+                let usuarioEncontrado = buscarUsuario(emailBusqueda);
+                console.log(usuarioEncontrado);
+                break;
+        
+            case "8":
+                // Borrar Usuario
+                let nombreBorrar = prompt("Ingrese el nombre del usuario a borrar:");
+                let emailBorrar = prompt("Ingrese el email del usuario a borrar:");
+                borrarUsuario(nombreBorrar, emailBorrar);
+                break;
+            
+            case "9":
+                // Prestar libro
+                let idLibroPrestar = parseInt(prompt("Ingrese el ID del libro a prestar:"));
+                let idUsuarioPrestar = parseInt(prompt("Ingrese el ID del usuario que lo solicita:"));
+                prestarLibro(idLibroPrestar, idUsuarioPrestar);
+                break;
+    
+            case "10":
+                // Devolver libro
+            let idLibroDevolver = parseInt(prompt("Ingrese el ID del libro a devolver:"));
+            let idUsuarioDevolver = parseInt(prompt("Ingrese el ID del usuario que lo devuelve:"));
+            devolverLibro(idLibroDevolver, idUsuarioDevolver);
+            break;
+            
+            case "11":
+                // Genera un reporte de libro
+                generarReporteLibros();
+                break;
+            
+            case "12":
+                calcularEstadisticas();
+                break;
+            
+                case "13":
+                normalizarDatos();
+                console.log("Datos normalizados correctamente.");
+                break;
+            
+            case "14":
+                // Opción para salir
+                console.log("Saliendo del sistema...");
+                break;
+            
+            default:
+                // Nos devuelve un mensaje diciendo que la opcion es invalida
+                console.log("Opción inválida. Por favor, selecciona una opción del menú.");
+        }
+    } 
+    while (opcion !== "14");
+}
+menuPrincipal();
