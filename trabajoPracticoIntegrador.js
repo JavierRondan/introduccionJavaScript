@@ -1,4 +1,5 @@
 const prompt = require("prompt-sync")({ sigint: true });
+// Trabajo integrador de Carlos Javier Rondan.
 
 // Punto 1: Estructura de Datos
 // a) Crear un array de objetos llamado libros que contenga al menos 10 libros. Cada libro debe tener las siguientes propiedades:
