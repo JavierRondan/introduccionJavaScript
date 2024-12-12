@@ -200,3 +200,58 @@ function borrarUsuario(nombre, email) {
         console.log(`No se encontró un usuario con el nombre: ${nombre} y email: ${email}`);
     }
 }
+// Punto 4: Sistema de Prestamo
+// a) Desarrollar una función prestarLibro(idLibro, idUsuario) que marque un libro como no disponible y lo agregue a la lista de libros prestados del usuario.
+
+// Función para prestar un libro,
+function prestarLibro(idLibro, idUsuario) {
+    //Busca el libro y el usuario usando find para encontrarlos en su array
+    let usuario = usuarios.find(u => u.id === idUsuario);
+    let libroI = libros.find(l => l.id === idLibro);
+    // Busca si el libro y el usuario estan en el array
+    //En caso que no este muestra un mensaje indicando que no esta disponible
+    // Buscamos el libro por ID
+    let libro = libros.find(libro => libro.id === idLibro);
+    if (!libro) {
+        console.log("No se encontro ningun libro con este ID.");
+        return;
+    }
+
+    // Verificamos si el libro esta disponible en el array
+    if (!libro.disponible) {
+        console.log("El libro " + libro.titulo + " no esta disponible.");
+        return;
+    }
+    libro.disponible = false;
+    usuario.librosPrestados.push(idLibro);
+    console.log("Prestamo realizado con exito. Usuario: " + usuario.nombre + ", Libro: " + libro.titulo);
+}
+
+// b)implementar una funcion devolerLibro(idLibro, idUsuario) que marque un libro como disponible y lo elimine de la lista de libros prestados del usuario
+
+// Función para devolver un libro prestado por un usuario
+     function devolverLibro(idLibro, idUsuario) { // Buscamos el usuario por ID
+        let usuario = usuarios.find(usuario => usuario.id === idUsuario);
+        if (!usuario) {
+            console.log("No se encontro ningun usuario con el ID proporcionado.");
+            return;
+        }
+    
+        let indiceLibroPrestado = usuario.librosPrestados.indexOf(idLibro); // Verificamos si el libro esta en la lista de libros prestados del usuario
+        if (indiceLibroPrestado === -1) {
+            console.log("El libro con ID " + idLibro + " no fue prestado al usuario.");
+            return;
+        }
+    
+        let libro = libros.find(libro => libro.id === idLibro); // Busca el libro por id
+        if (!libro) {
+            console.log("No se encontro ningun libro con este ID.");
+            return;
+        }
+    
+        libro.disponible = true; // Ponemos el libro como disponible y lo eliminamos del array de libros prestados
+    
+        usuario.librosPrestados.splice(indiceLibroPrestado, 1); // Eliminamos el ID del libro de la lista de libros prestados
+        console.log("Devolucion realizada. Usuario: " + usuario.nombre + ", Libro: " + libro.titulo);
+    }
+
