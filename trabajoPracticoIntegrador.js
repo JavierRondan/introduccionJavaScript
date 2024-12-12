@@ -144,3 +144,59 @@ borrarLibro(15); // Ejemplo de ID invalido*/
 //console.log("Libros después de borrar:");
 //console.log(libros);*/
 
+// Punto 3: Gestion de Usuarios.
+// a) Implementar una función registrarUsuario(nombre, email) que agregue un nuevo usuario al array usuarios.
+
+// Función para registrar un nuevo usuario
+function registrarUsuario(nombre, email) {
+    // Generar un nuevo ID basado en el último ID del array
+    let nuevoId = usuarios.length > 0 ? usuarios[usuarios.length - 1].id + 1 : 1;
+
+   // Crear el nuevo usuario
+    let nuevoUsuario = {
+        id: nuevoId,
+        nombre: nombre,
+        email: email,
+        librosPrestados: [] // Inicialmente, no tiene libros prestados
+    };
+
+    // Agregar el nuevo usuario al array
+    usuarios.push(nuevoUsuario);
+
+    console.log("Usuario registrado exitosamente:");
+    console.log(nuevoUsuario);
+}
+
+
+// b) Implementar una función mostrarTodosLosUsuarios() que me devuelva el array completo de usuarios
+
+// Función para mostrar todos los usuarios
+function mostrarTodosLosUsuarios() {
+    console.log("Lista completa de usuarios:");
+    return usuarios;
+}
+/*
+// Ejemplo de uso:
+let todosLosUsuarios = mostrarTodosLosUsuarios();
+console.log(todosLosUsuarios);
+*/
+// c)Crear una función buscarUsuario(email) que devuelva la información de un usuario dado su email.
+
+// Función para buscar un usuario por email
+function buscarUsuario(email) {
+    let usuario = usuarios.find(u => u.email === email);
+    return usuario ? usuario : `No se encontró un usuario con el email: ${email}`;
+}
+// Función para borrar un usuario por nombre y email
+function borrarUsuario(nombre, email) {
+   // Encontrar el índice del usuario con el nombre y email proporcionados
+    let i = usuarios.findIndex(u => u.nombre === nombre && u.email === email);
+
+    if (i !== -1) {
+        // Eliminar el usuario del array
+        let usuarioEliminado = usuarios.splice(i, 1)[0];
+        console.log("Usuario eliminado exitosamente:", usuarioEliminado);
+    } else {
+        console.log(`No se encontró un usuario con el nombre: ${nombre} y email: ${email}`);
+    }
+}
