@@ -255,3 +255,49 @@ function prestarLibro(idLibro, idUsuario) {
         console.log("Devolucion realizada. Usuario: " + usuario.nombre + ", Libro: " + libro.titulo);
     }
 
+// Punto 5:Sistema de Prestamos
+// a) Crear una funcion generarReporteLibros() que utilice metodos avanzados de arrays (.map(), .filter(), .reduce()) para generar un reporte con
+// la siguiente informacion
+// Canitdad total de libros
+// Cantidad de libros prestados
+// Cantidas de libros por genero
+// Libro mas antiguo y mas nuevo
+
+function generarReporteLibros() {
+    // Cantidad total de libros. Calculamos con libros.length y da la contidad de libros disponibles
+    let totalLibros = libros.length;
+
+    // Cantidad de libros prestados. Utilizamos reduce para sumar la longitud de los arrays librosPrestados
+    let totalLibrosPrestados = usuarios.reduce((total, usuario) => total + usuario.librosPrestados.length, 0);
+
+    // Cantidad de libros por género. Use reduce para agrupar libros por genero e incrementar el contador correspondiente
+    let librosPorGenero = libros.reduce((acumulador, libro) => {
+        acumulador[libro.género] = (acumulador[libro.género] || 0) + 1;
+        return acumulador;
+    }, {});
+    // Ordenamos los libros por año de publicacion usando forEach
+    let libroMasAntiguo = libros[0]; // libroMasAntiguo
+    let libroMasNuevo = libros[0];
+
+    libros.forEach(libro => {
+        if (libro.año < libroMasAntiguo.año) {
+            libroMasAntiguo = libro;
+        }
+        if (libro.año > libroMasNuevo.año) {
+            libroMasNuevo = libro;
+        }
+    });
+
+    
+    // Mostrar el reporte usando Object.keys y forEach.
+    console.log("=== Reporte de Libros ===");
+    console.log(`Cantidad total de libros: ${totalLibros}`);
+    console.log(`Cantidad de libros prestados: ${totalLibrosPrestados}`);
+    console.log("Cantidad de libros por género:");
+    Object.keys(librosPorGenero).forEach(genero => {
+        console.log(`  ${genero}: ${librosPorGenero[genero]}`);
+    });
+    console.log(`Libro más antiguo: "${libroMasAntiguo.titulo}" (${libroMasAntiguo.año})`);
+    console.log(`Libro más nuevo: "${libroMasNuevo.titulo}" (${libroMasNuevo.año})`);
+
+}
