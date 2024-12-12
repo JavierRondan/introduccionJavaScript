@@ -365,3 +365,36 @@ console.log(`Año de publicación más frecuente: ${anioMasFrecuente}`); //Nos m
 console.log(`Diferencia en años entre el libro más antiguo y el más nuevo: ${diferenciaAnios} años`); // Calcula la diferencia entre los libros, mas antiguo y el mas reciente del array
 }
 
+// Punto 8: Manejode Cadenas
+// a) Crear una funcion normalizarDatos() que utilice metodos de strings para:
+// Convertir todos los titulos a mayusculas.
+// Eliminar espacios en blanco al inicio y final de los nombres de autores.
+// Formatear los emails de los usuarios a minusculas.
+
+function normalizarDatos() {
+    // Convierte todos los títulos de los libros a mayúsculas.
+    // Usamos forEach para movernos por el rray libros y aplicar toUpperCase() a cada titulo, esto modifica los titulos de los libros a mayuscula
+    libros.forEach(libro => {
+        libro.titulo = libro.titulo.toUpperCase();
+    });
+
+    // Eliminar los espacios en blanco al inicio y final de los nombres de los autores.
+    // Usamos forEach para recorrer los libros y aplicar el trim() a cada nombre
+    libros.forEach(libro => {
+        libro.autor = libro.autor.trim(); // El metodo trim() elimina los espacios al principio y final de la cadena
+    });
+
+    // Formatear los emails de los usuarios a minúsculas usando forEach
+    // Este recorre el array usuarios y aplica toLoweCase() a cada email
+    usuarios.forEach(usuario => {
+        usuario.email = usuario.email.toLowerCase(); // Este convierte todos los correos a minusculas
+    });
+
+    console.log("Datos normalizados:");
+    console.log(libros);
+    console.log(usuarios);
+}
+/*
+// Ejemplo de uso
+normalizarDatos(); */
+
