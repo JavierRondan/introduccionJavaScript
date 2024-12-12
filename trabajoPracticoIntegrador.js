@@ -324,3 +324,44 @@ function librosConPalabrasEnTitulo() {
     return titulos;
 }
 librosConPalabrasEnTitulo()
+
+// Punto 7: Calculos Estadisticos
+// a) Desarrollar una funcion calcularEstadisticas() que utilice el objeto Math para caucular y motrar:
+// Promedio de años de publicacion de los libros.
+// Año de publicacion mas frecuente.
+// Diferencia en años entre el libro mas antiguo y el mas nuevo.
+
+function calcularEstadisticas() {
+    // Promedio de años de publicación. Usamos reduce para sumar todos los años de publicacion de los libros
+    // luego dividimos entre la cantidad total de libros y asi obtenemos el promedio
+    let totalAnios = libros.reduce((suma, libro) => suma + libro.año, 0);
+    let promedioAnios = totalAnios / libros.length;
+
+    // Año de publicación más frecuente. Usamos un objeto para contar las veces que aparece cada año.
+    let aniosFrequentes = libros.reduce((acumulador, libro) => {
+        acumulador[libro.año] = (acumulador[libro.año] || 0) + 1;
+        return acumulador;
+    }, {});
+
+    // Encontrar el año más frecuente
+    // Despues encontramos el año con mayor frecuencia de publicaciones
+    let anioMasFrecuente = Object.keys(aniosFrequentes).reduce((anioMax, anio) => {
+        return aniosFrequentes[anio] > aniosFrequentes[anioMax] ? anio : anioMax;
+    });
+
+    // Diferencia en años entre el libro más antiguo y el más nuevo.
+    // usamos Math.min y Match.Max para encontrar los años de publicacion mas antiguo y mas reciente
+    // y por ultimo los restamos
+    // En este caso uso spread operator para poder transformar el array libros.map en algo que Math.min y Math.max puedan leer.
+    // en caso de no usarlo de esta manera estallaria el proceso. El spread operator se usa para poder llamar a un array en otro lugar donde se espara un valor individual
+    let anioMasAntiguo = Math.min(...libros.map(libro => libro.año)); //Año mas antiguo
+    let anioMasNuevo = Math.max(...libros.map(libro => libro.año)); //Año mas reciente
+    let diferenciaAnios = anioMasNuevo - anioMasAntiguo; //Año mas antiguo - Año mas reciente
+
+ // Mostrar los resultados
+console.log(`Estadísticas:`);
+console.log(`Promedio de años de publicación: ${promedioAnios.toFixed(2)}`);  // el toFixed(2) lo utilizo para dedondear el promedio en 2 decimales
+console.log(`Año de publicación más frecuente: ${anioMasFrecuente}`); //Nos muestra el año que aparece mas veces
+console.log(`Diferencia en años entre el libro más antiguo y el más nuevo: ${diferenciaAnios} años`); // Calcula la diferencia entre los libros, mas antiguo y el mas reciente del array
+}
+
