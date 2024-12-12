@@ -301,3 +301,26 @@ function generarReporteLibros() {
     console.log(`Libro más nuevo: "${libroMasNuevo.titulo}" (${libroMasNuevo.año})`);
 
 }
+
+// Punto 6: Identificacion Avanzada de libros
+// a) Implementar una funcion librosConPalabrasEnTitulo() que identifique y muestre todos los libros cuyo titulo contiene mas de una palabra
+// (no titulos que contengan numeros ni otros caracteres). La funcion debe devolver un array con los titulos de esos libros y monstrarlo en la consola
+
+function librosConPalabrasEnTitulo() {
+    // Uso filter para buscar en todos los libros y verificr de que el titulo contiene solo palabras alfabeticas(sin numeros ni caracteres especiales)
+    let librosFiltrados = libros.filter(libro => {
+        // Dividir el título en palabras y comprobar si tiene más de una palabra
+        let palabras = libro.titulo.split(' ').filter(palabra => /^[a-zA-ZáéíóúÁÉÍÓÚÑñ]+$/.test(palabra));
+        // Si el titulo tiene mas de una palabra valida y es igual al titulo original, entonces lo retornamos
+        return palabras.length > 1&& libro.titulo === palabras.join(' ');
+    });
+    // Usamos map para extraer solo los títulos de los libros que cumplen con la condicin de tenes mas de una palabra valida
+    let titulos = librosFiltrados.map(libro => libro.titulo);
+
+    // Devuelve en consola los resultados. Muestra la lista final de libros que contiene mas de una palabra en su titulo y sin caracteres especiales
+    console.log("Libros con más de una palabra en el título:");
+    console.log(titulos);
+    
+    return titulos;
+}
+librosConPalabrasEnTitulo()
