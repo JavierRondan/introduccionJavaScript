@@ -392,8 +392,8 @@ opcion = prompt(`---Menú Principal---\n
                 case "4":
                     // Opcion para borrar libro
                     let idLibroBorrar = parseInt(prompt("Ingrese el ID del libro a borrar: "));
-                borrarLibro(idLibroBorrar);
-                break;
+                    borrarLibro(idLibroBorrar);
+                    break;
                 
                 case "5":
                     // Opcion Registrar usuario
